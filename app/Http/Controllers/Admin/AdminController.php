@@ -43,4 +43,17 @@ class AdminController extends Controller
         return redirect()->back()->with($notification);
     }
     //end method
+
+    //admin logout
+    public function adminLogout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
+    ///end methods
+
+    //get all agencies
+    public function adminAllAgencies(){
+        $agencies = User::where('role','agency')->get();
+        return view('admin.agency.all_agencies',compact('agencies'));
+    }
 }
