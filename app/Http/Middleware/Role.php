@@ -19,13 +19,13 @@ class Role
 
     switch ($role) {
         case 'user':
-            $redirectRoute = 'user.dashboard';
+            $redirectRoute = 'user/dashboard';
             break;
         case 'agency':
-            $redirectRoute = 'agency.dashboard';
+            $redirectRoute = 'agency/dashboard';
             break;
         case 'admin':
-            $redirectRoute = 'admin.dashboard';
+            $redirectRoute = 'admin/dashboard';
             break;
         // Add more cases as needed for other roles
 

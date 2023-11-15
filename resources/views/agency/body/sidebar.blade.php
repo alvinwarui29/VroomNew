@@ -19,12 +19,12 @@
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-home-circle'></i>
 						</div>
-						<div class="menu-title">Agencies</div>
+						<div class="menu-title">Product Manage</div>
 					</a>
 					<ul>
-						<li> <a href="{{route('admin.all.agencies.display')}}"><i class="bx bx-right-arrow-alt"></i>All Agencies</a>
+						<li> <a href="{{route('agency.all.products')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
 						</li>
-						<li> <a href="dashboard-analytics.html"><i class="bx bx-right-arrow-alt"></i>Pending Agencies</a>
+						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>New Products</a>
 						</li>
 						
 					</ul>

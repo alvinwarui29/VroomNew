@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
                     return redirect('/dashboard');
 
                 }if(Auth::check() && Auth::user()->role == 'agency'){
-                    return redirect('/vendor/dashboard');
+                    return redirect('/agency/dashboard');
 
                 }if(Auth::check() && Auth::user()->role == 'admin'){
                     return redirect('/admin/dashboard');

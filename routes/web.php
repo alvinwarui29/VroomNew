@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,14 +34,15 @@ Route::middleware(['auth','role:agency'])->group(function(){
     Route::controller(AgencyController::class)->group(function(){
 
         Route::get('/agency/dashboard','dashboard')->name('agency.dashboard');
-        Route::get('/admin/profile/setup','profileSetup')->name('admin.profile.setup');
-        Route::post('admin/profile/store','adminProfileStore')->name('admin.profile.store');
-        Route::get('/admin/logout','adminLogout')->name('admin.logout');
-        Route::get('/admin/add/agency','addAgency')->name('add.agency');
-        Route::get('/edit/agency','adminLogout')->name('edit.agency');
-        Route::get('/delete/agency','adminLogout')->name('delete.agency');
-        Route::get('/admin/all/agencies','adminAllAgencies')->name('admin.all.agencies.display');
     });
+    
+    
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/all/products','allProducts')->name('agency.all.products');
+        Route::get('/add/product','addProduct')->name('agency.add.product');
+        Route::post('/store/product','storeProduct')->name('store.product');
+
+});
 });
 
 
