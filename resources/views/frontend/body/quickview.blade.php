@@ -1,6 +1,3 @@
-@extends('frontend.master_dashboard')
-@section('main')
-
 <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -92,5 +89,3 @@
             </div>
         </div>
     </div>
-
-@endsection

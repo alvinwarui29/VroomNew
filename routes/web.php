@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\backend\ProductController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', function () {
+    return view('frontend.master_dashboard');
+});
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
@@ -48,12 +54,9 @@ Route::middleware(['auth','role:agency'])->group(function(){
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.master_dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

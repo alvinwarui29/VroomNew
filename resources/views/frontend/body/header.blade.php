@@ -1,6 +1,3 @@
-@extends('frontend.master_dashboard')
-@section('main')
-
 <header class="header-area header-style-1 header-height-2">
         <div class="mobile-promotion">
             <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
@@ -499,11 +496,6 @@
         </div>
     </header>
 
-   <!-- End Header  -->
-
-
-
-
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
@@ -669,5 +661,3 @@
             </div>
         </div>
     </div>
-
-    @endsection
