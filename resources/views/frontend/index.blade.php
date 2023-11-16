@@ -368,7 +368,7 @@
                                         <div class="product-category">
                                             <a href="shop-grid-right.html">Hodo Foods</a>
                                         </div>
-                                        <h2><a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a></h2>
+                                        <h2><a href="shop-product-right.html">All Natural </a></h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 80%"></div>

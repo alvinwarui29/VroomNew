@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function agency(){
+        return $this->belongsTo(User::class,'agency_id','id');
+    }
 }

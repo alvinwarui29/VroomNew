@@ -30,7 +30,7 @@ class ProductController extends Controller
         $image = $req->file('product_thambnail');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         Image::make($image)->resize(448,280)->save('uploads/products/thambnail/'.$name_gen);
-        $save_url = 'upload/products/thambnail/'.$name_gen;
+        $save_url = 'uploads/products/thambnail/'.$name_gen;
         $product_id = Product::insertGetId([
             'product_name'=>$req->product_name,
             'product_slug' => strtolower(str_replace(' ','-',$req->product_name)),

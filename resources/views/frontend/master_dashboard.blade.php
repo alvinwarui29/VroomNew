@@ -99,6 +99,34 @@
  }
  @endif 
 </script>
+<script type="text/javascript">
+
+$.ajaxSetup({
+   headers:{
+       'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+   }
+})
+
+
+</script>
+<script>
+    //Join Room function
+    function joinRoom(product_id,user_id){
+        var id = id;
+        $.ajax({
+            type : "POST",
+            dataType : json,
+            url: "/join/room/",
+            data : {product_id:product_id,user_id:user_id},
+            success:function(data){
+
+            }
+        });
+    }
+
+    // End join Room
+</script>
+
 </body>
 
 </html>
