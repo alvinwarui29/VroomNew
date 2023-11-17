@@ -30,7 +30,6 @@
     <!-- Header  -->
 
   @include('frontend.body.header')
-  @include('frontend.home.home_slider')
     <!--End header--> 
 
 
@@ -109,23 +108,75 @@ $.ajaxSetup({
 
 
 </script>
-<script>
-    //Join Room function
-    function joinRoom(product_id,user_id){
-        var id = id;
-        $.ajax({
-            type : "POST",
-            dataType : json,
-            url: "/join/room/",
-            data : {product_id:product_id,user_id:user_id},
-            success:function(data){
+<script type="text/javascript">
 
+    //get all tours
+    function getAllNewProductTours(){
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: "/get/all/tours/",
+            success: function (data) {
+                var rows="";
+                
+              
+            }
+        });
+    }//end get all tours
+
+    function joinRoom(product_id, user_id) {
+        var button = $('#' + product_id);
+        
+        if (button.prop('disabled')) {
+            // Button is already disabled, do nothing
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: "/join/room/",
+            data: { product_id: product_id, user_id: user_id },
+            success: function (data) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        icon: 'success',
+                        title: data.success
+                    });
+
+                    
+                } else {
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+                button.text('Joined').addClass('btn-secondary').removeClass('btn-success');
+                
+                // Disable the button
+                button.prop('disabled', true);
             }
         });
     }
-
     // End join Room
+
 </script>
+
+
+
+
+</script>
+
+
 
 </body>
 
