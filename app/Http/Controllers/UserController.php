@@ -54,5 +54,9 @@ class UserController extends Controller
             return redirect()->back()->with($notification);
         }
     }
-    
+    //end method
+
+    public function Login(){
+        return view('frontend.displays.login');
+    }
 }

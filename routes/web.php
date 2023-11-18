@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\backend\ProductController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\RedirectIfAuthenticated;    
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +85,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/users/login', [UserController::class, 'Login'])->name('all.login')->middleware(RedirectIfAuthenticated::class);
 require __DIR__ . '/auth.php';
