@@ -57,6 +57,40 @@ class TourController extends Controller
         }
     }//end method
 
+
+    public function leaveRoom(Request $req){
+        $user_id = $req->user_id;
+        $product_id = $req->product_id;
+         // Check if the product exists
+         $product = Product::find($product_id);
+         if (!$product) {
+             return response()->json([
+                 "status" => 404,
+                 "error" => "Product not found"
+             ]);
+         }
+     
+         $product_name = Product::where('id', $product_id)->value('product_name');
+         $isUserJoined = JoinedTour::where('user_id', $user_id)->where('product_id', $product_id)->exists();
+         if ($isUserJoined) {
+                // Increment the joined column in the products table
+                $justcheck =JoinedTour::where('user_id', $user_id)->where('product_id', $product_id)->delete();
+                if($justcheck){
+                    Product::where('id', $product_id)->decrement('joined');
+                    return response()->json([
+                        "status" => 200,
+                        "success" => "You have left ".$product_name." tour successfully"
+                    ]);
+                }
+        }else{
+            return response()->json([
+                "status" => 200,
+                "error" => "You have not joined ".$product_name." tour"
+            ]);
+
+        }
+    }
+
     public function getTours(){
         $products = Product::orderBy('product_name')
         ->whereRaw('joined <= product_qty');

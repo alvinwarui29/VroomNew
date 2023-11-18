@@ -61,20 +61,28 @@ $discount = round($discountD);
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
                                     @if($product->discount_price == NULL)
-                                    <span class="current-price text-brand">{{$product->selling_price}}</span>
+                                    <span class="current-price text-brand">Kshs{{$product->selling_price}}</span>
                                     @else
-                                    <span class="current-price text-brand">{{$product->selling_price}}</span>
+                                    <span class="current-price text-brand">Kshs{{$product->discount_price}}</span>
                                     <span>
-                                        <span style="font-size: 14px;" class="save-price font-md color3 ml-15">{{$discount}}</span>
-                                        <span class="old-price font-md ml-15">{{$product->discount_price}}%</span>
+                                        <span style="font-size: 14px;" class="save-price font-md color3 ml-15">{{$discount}}%</span>
+                                        <span class="old-price font-md ml-15">Kshs{{$product->selling_price}}%</span>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+                            @php
+                            $available_slots =$product->product_qty - $product->joined
+                            @endphp
                             <div class="short-desc mb-30">
-                                <p class="font-lg">{{$product->short_descp}}</p>
+                                <p class="font-lg">Short description:{{$product->short_descp}}</p>
+                                <p class="font-lg">Total slots:{{$product->product_qty}}</p>
+                                <p class="font-lg">Total slots:{{$product->product_qty}}</p>
+                                <p class="font-lg">Available slots:{{$available_slots}}</p>
+                                <p class="font-lg">By:{{$product->agency->name}}</p>
                             </div>
-                            <div class="detail-extralink mb-50">
+                           <!-- add to cart -->
+                            <!-- <div class="detail-extralink mb-50">
                                 <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                     <input type="text" name="quantity" class="qty-val" value="1" min="1">
@@ -85,7 +93,20 @@ $discount = round($discountD);
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
+                            <!-- //end to cart -->
+                            <div class="detail-extralink mb-50">
+                            @php
+						$isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
+						@endphp
+                            @if($isjoined == NULL)
+                            <a type="button" onclick="joinRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-success px-5 radius-30 "> Join Room </a>
+                            @else
+
+                            <a type="button" onclick="leaveRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-danger px-5 radius-30 "> Leave room </a>
+                            @endif   
+                        </div>
+
                         </div>
                         <!-- Detail Info -->
                     </div>
