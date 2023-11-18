@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    
 </head>
 
 <body>
@@ -117,6 +118,52 @@
         } //end get all tours
 
         //start join room
+        function joinRoom(product_id, user_id) {
+            var button = $('#' + product_id);
+
+            if (button.prop('disabled')) {
+                // Button is already disabled, do nothing
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/join/room/",
+                data: {
+                    product_id: product_id,
+                    user_id: user_id
+                },
+                success: function(data) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success
+                        });
+
+
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error
+                        });
+                    }
+                    button.text('Leave Room').addClass('btn-danger').removeClass('btn-success');
+                    // Disable the button
+                    button.prop('disabled', true);
+                    
+                }
+            });
+        }
         function joinRoom(product_id, user_id) {
             var button = $('#' + product_id);
 

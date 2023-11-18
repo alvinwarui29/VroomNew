@@ -1,6 +1,7 @@
 @extends('frontend.master_dashboard')
 @section('main')
 
+
  
         <!--End hero slider-->
      <!-- @include('frontend.home.featured_categories') -->
@@ -8,7 +9,8 @@
         <!--End category slider-->
         <!--End banners-->
 
-
+<!-- 
+	@include('frontend.home.home_slider') -->
 	@include('frontend.home.new_products')
 
         <!--Products Tabs-->

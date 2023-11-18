@@ -75,6 +75,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/leave/room','leaveRoom')->name('leave.tour');
         Route::get('/get/all/tours','getTours')->name('get.all.tours');
         Route::get('/view/single/tour/{id}/{slug}','getTour')->name('view.single.tour');
+        Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
+        Route::get('/user/profile/setup', [UserController::class, 'userProfile'])->name('user.profile.setup');
+        Route::post('/user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
     });
     //end
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

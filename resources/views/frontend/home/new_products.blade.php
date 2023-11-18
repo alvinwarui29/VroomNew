@@ -27,7 +27,11 @@ $products = App\Models\Product::orderBy('product_name')
 						@php
 						$isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
 						@endphp
+						@if($isjoined)
+						<a type="button"  id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}">Joined</a>
+						@else
 						<a type="button" onclick="joinRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}"> {{$isjoined ? 'Joined' : 'Join '}} </a>
+						@endif
 						<a href="{{url('/view/single/tour/'.$product->id.'/'.$product->product_slug)}}" type="button" style="color:#198754; border:solid #198754" class="btn btn-outline-success px-5 radius-30">View Tour</a>
 					</div>
 				</div>
