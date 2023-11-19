@@ -38,7 +38,7 @@
 					<ul>
 						<li> <a href="{{route('agency.all.categories')}}"><i class="bx bx-right-arrow-alt"></i>All Categories</a>
 						</li>
-						<li> <a href="{{route('agency.add.categoryt')}}"><i class="bx bx-right-arrow-alt"></i>New Category</a>
+						<li> <a href="{{route('agency.add.category')}}"><i class="bx bx-right-arrow-alt"></i>New Category</a>
 						</li>
 						
 					</ul>

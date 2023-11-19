@@ -1,5 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('agency.agency_dashboard')
+@section('agency')
 
 <div class="page-content">
     <!--breadcrumb-->

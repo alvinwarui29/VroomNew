@@ -160,19 +160,18 @@
                                 }
                                 @endphp
                                 @auth
-
+                                <a href="{{route('user.profile.setup')}}">
+                                    <img src="{{ (!empty($userData->photo)) 
+							?
+							 url('uploads/user_images/'.$userData->photo)
+							 :
+							 url('uploads/no_image.jpg') 
+							}}
+						" class="user-img" alt="user avatar">
+                                </a>
 
                                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                    <a href="{{route('user.profile.setup')}}">
-                                        <img src="{{ (!empty($userData->photo)) 
-                                        ?
-                                        url('uploads/user_images/'.$userData->photo)
-                                        :
-                                        url('uploads/no_image.jpg') 
-                                        }}
-                                    " class="user-img" alt="user avatar">
-                                    </a>
                                     <div class="user-info ps-3">
                                         <p class="user-name mb-0">{{Auth()->user()->name}}</p>
                                         <!-- <p class="designattion mb-0">Web Designer</p> -->
@@ -306,14 +305,14 @@
 
                                     @endphp
                                     <a href="{{route('all.joined.tours')}}">Joined Tours <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        @foreach($tours as $tour)
-                                        <li>
-                                            <a style="align-content: center;" href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> {{$tour->product->product_name}}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-
+                                            <ul class="sub-menu">
+                                                @foreach($tours as $tour)
+                                                <li>
+                                                    <a style="align-content: center;" href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> {{$tour->product->product_name}}</a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        
                                 </li>
                                 <li>
                                     <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>

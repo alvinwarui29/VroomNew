@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:agency'])->group(function () {
     //Agency controller
     Route::controller(AgencyController::class)->group(function () {
-
+        Route::get('/agency/logout',"agencyLogout")->name('agency.logout');
         Route::get('/agency/dashboard', 'dashboard')->name('agency.dashboard');
     });
     //end
