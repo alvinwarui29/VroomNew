@@ -95,11 +95,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/get/all/tours', 'getTours')->name('get.all.tours');
         Route::get('/all/joined/tours', 'allJoinedTours')->name('all.joined.tours');
         Route::get('/view/single/tour/{id}/{slug}', 'getTour')->name('view.single.tour');
-        Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
-        Route::get('/user/profile/setup', [UserController::class, 'userProfile'])->name('user.profile.setup');
-        Route::post('/user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
+        Route::get('/view/specific/tours/{categoryid}', 'getSpecificTours')->name('view.specific.tours');
+
     });
     //end
+
+    Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
+    Route::get('/user/profile/setup', [UserController::class, 'userProfile'])->name('user.profile.setup');
+    Route::post('/user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

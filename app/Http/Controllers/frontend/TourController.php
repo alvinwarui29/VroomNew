@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\JoinedTour;
 use App\Models\multiImg;
 use Carbon\Carbon;
+use App\Models\Category;
 
 
 class TourController extends Controller
@@ -104,6 +105,12 @@ class TourController extends Controller
         $multiImage = multiImg::where('product_id',$id)->get(); 
         $product = Product::findorfail($id);
         return view('frontend.displays.view_tour',compact('product','multiImage'));
+    }//end method
+
+
+    public function getSpecificTours($categoryid){
+        $specific_products = Product::orderBy('product_name')->where('category_id',$categoryid)->get();
+        return view('frontend.displays.view_specific_tours',compact('specific_products'));
     }
     
     

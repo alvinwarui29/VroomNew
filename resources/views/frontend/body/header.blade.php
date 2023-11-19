@@ -241,7 +241,7 @@
                                 <ul>
                                     @foreach($first_count as $category)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image) }}" alt="" />{{$category->category_name}}</a>
+                                        <a href="{{route('view.specific.tours',$category->id)}}"> <img src="{{ asset('uploads/categories_images/'.$category->category_image) }}" alt="" />{{$category->category_name}}</a>
                                     </li>
                                     @endforeach
 
