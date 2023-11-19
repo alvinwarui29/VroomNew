@@ -18,9 +18,15 @@ $products = App\Models\Product::orderBy('product_name')
 						<h5 class="card-title">{{$product->product_name}}</h5>
 						<p style="max-height: 20px; overflow: hidden; text-overflow: ellipsis;" class="card-text">{{$product->short_descp}}</p>
 					</div>
+					@php
+					$slots =$product->product_qty;
+					$joined =$product->joined;
+					$difference = $slots - $joined;
+					@endphp
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Price per person:Ksh{{$product->selling_price}}</li>
-						<li class="list-group-item">Slots available:{{$product->product_qty}}</li>
+						<li class="list-group-item">Total slots:{{$slots}}</li>
+						<li class="list-group-item">Slots available:{{$difference}}</li>
 						<li class="list-group-item">Agency name:{{$product->agency->name}}</li>
 					</ul>
 					<div class="card-body">

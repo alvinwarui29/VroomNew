@@ -31,6 +31,20 @@
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						</div>
+						<div class="menu-title">Category Manage</div>
+					</a>
+					<ul>
+						<li> <a href="{{route('admin.all.categories')}}"><i class="bx bx-right-arrow-alt"></i>All Categories</a>
+						</li>
+						<li> <a href="{{route('admin.add.category')}}"><i class="bx bx-right-arrow-alt"></i>New Category</a>
+						</li>
+						
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
 						<div class="menu-title">Application</div>

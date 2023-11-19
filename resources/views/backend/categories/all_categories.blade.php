@@ -17,7 +17,7 @@
         <div class="ms-auto">
             <div class="btn-group">
 
-                <a href="{{ route('agency.add.category') }}" class="btn btn-primary">Add Category</a>
+                <a href="{{ route('admin.add.category') }}" class="btn btn-primary">Add Category</a>
 
 
             </div>
@@ -43,7 +43,7 @@
                         <tr>
                             <td> {{ $key+1 }} </td>
                             <td>{{ $item->category_name }}</td>
-                            <td> <img src="{{ asset($item->category_image) }}" style="width: 70px; height:40px;"> </td>
+                            <td> <img src="{{ asset('uploads/categories_images/'. $item->category_image) }}" style="width: 70px; height:40px;"> </td>
 
                             <td>
                                 <a href="{{ route('edit.category',$item->id) }}" class="btn btn-info">Edit</a>

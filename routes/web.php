@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\RedirectIfAuthenticated;    
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,24 +38,28 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/delete/agency', 'adminLogout')->name('delete.agency');
         Route::get('/admin/all/agencies', 'adminAllAgencies')->name('admin.all.agencies.display');
     });
+    //Category controller
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/categories', 'allCategories')->name('admin.all.categories');
+        Route::get('/add/category', 'addCategory')->name('admin.add.category');
+        Route::get('/edit/category', 'editCategory')->name('edit.category');
+        Route::get('/delete/category', 'deleteCategory')->name('delete.category');
+        Route::post('/store/category', 'storeCategory')->name('store.category');
+    });
+    //end
+
+
 });
 // Agency middleware
 Route::middleware(['auth', 'role:agency'])->group(function () {
     //Agency controller
     Route::controller(AgencyController::class)->group(function () {
-        Route::get('/agency/logout',"agencyLogout")->name('agency.logout');
+        Route::get('/agency/logout', "agencyLogout")->name('agency.logout');
         Route::get('/agency/dashboard', 'dashboard')->name('agency.dashboard');
     });
     //end
 
-    //Category controller
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/all/categories', 'allCategories')->name('agency.all.categories');
-        Route::get('/add/category', 'addCategory')->name('agency.add.category');
-        Route::post('/store/category', 'storeCategory')->name('store.category');
 
-    });
-    //end
 
 
 
@@ -68,9 +72,9 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
     });
     //end
 
-    
-    
-    
+
+
+
 });
 // End Agency middleware
 
@@ -85,12 +89,12 @@ Route::get('/dashboard', function () {
 //user middleware
 Route::middleware('auth')->group(function () {
     //Tour controller
-    Route::controller(TourController::class)->group(function(){
-        Route::post('/join/room','joinRoom')->name('join.tour');
-        Route::post('/leave/room','leaveRoom')->name('leave.tour');
-        Route::get('/get/all/tours','getTours')->name('get.all.tours');
-        Route::get('/all/joined/tours','allJoinedTours')->name('all.joined.tours');
-        Route::get('/view/single/tour/{id}/{slug}','getTour')->name('view.single.tour');
+    Route::controller(TourController::class)->group(function () {
+        Route::post('/join/room', 'joinRoom')->name('join.tour');
+        Route::post('/leave/room', 'leaveRoom')->name('leave.tour');
+        Route::get('/get/all/tours', 'getTours')->name('get.all.tours');
+        Route::get('/all/joined/tours', 'allJoinedTours')->name('all.joined.tours');
+        Route::get('/view/single/tour/{id}/{slug}', 'getTour')->name('view.single.tour');
         Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
         Route::get('/user/profile/setup', [UserController::class, 'userProfile'])->name('user.profile.setup');
         Route::post('/user/profile/store', [UserController::class, 'userProfileStore'])->name('user.profile.store');

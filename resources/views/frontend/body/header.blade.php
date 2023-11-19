@@ -227,67 +227,51 @@
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
                         <a class="categories-button-active" href="#">
-                            <span class="fi-rs-apps"></span> All Categories
+                            <span class="fi-rs-apps"></span> All Tour Categories
                             <i class="fi-rs-angle-down"></i>
                         </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categori-dropdown-inner">
+                                @php
+                                $categories = App\Models\Category::orderBy('category_name')->limit(6)->get();
+                                $half= ceil($categories->count()/2);
+                                $first_count = $categories->splice(0,$half);
+                                $last_count = $categories;
+                                @endphp
                                 <ul>
+                                    @foreach($first_count as $category)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
+                                        <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image) }}" alt="" />{{$category->category_name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing & beauty</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a>
-                                    </li>
+                                    @endforeach
+
                                 </ul>
                                 <ul class="end">
+                                    @foreach($last_count as $category)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-6.svg') }}" alt="" />Wines & Drinks</a>
+                                        <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image)}}" alt="" />{{$category->category_name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-7.svg') }}" alt="" />Fresh Seafood</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-8.svg') }}" alt="" />Fast food</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-9.svg') }}" alt="" />Vegetables</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-10.svg') }}" alt="" />Bread and Juice</a>
-                                    </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
-                            <div class="more_slide_open" style="display: none">
+                            <!-- Show more  -->
+                            <!-- <div class="more_slide_open" style="display: none">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-1.svg') }}" alt="" />Milks and Dairies</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-2.svg') }}" alt="" />Clothing & beauty</a>
+                                            <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image)}}" alt="" />{{$category->category_name}}</a>
                                         </li>
                                     </ul>
                                     <ul class="end">
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-3.svg') }}" alt="" />Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-4.svg') }}" alt="" />Fresh Seafood</a>
+                                            <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image)}}" alt="" />{{$category->category_name}}</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
+                            <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div> -->
+
                         </div>
                     </div>
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
@@ -305,14 +289,14 @@
 
                                     @endphp
                                     <a href="{{route('all.joined.tours')}}">Joined Tours <i class="fi-rs-angle-down"></i></a>
-                                            <ul class="sub-menu">
-                                                @foreach($tours as $tour)
-                                                <li>
-                                                    <a style="align-content: center;" href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> {{$tour->product->product_name}}</a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        
+                                    <ul class="sub-menu">
+                                        @foreach($tours as $tour)
+                                        <li>
+                                            <a style="align-content: center;" href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> {{$tour->product->product_name}}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+
                                 </li>
                                 <li>
                                     <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
