@@ -77,7 +77,6 @@ $discount = round($discountD);
                             <div class="short-desc mb-30">
                                 <p class="font-lg">Short description:{{$product->short_descp}}</p>
                                 <p class="font-lg">Total slots:{{$product->product_qty}}</p>
-                                <p class="font-lg">Total slots:{{$product->product_qty}}</p>
                                 <p class="font-lg">Available slots:{{$available_slots}}</p>
                                 <p class="font-lg">By:{{$product->agency->name}}</p>
                             </div>

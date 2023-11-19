@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;    
 
@@ -46,6 +47,18 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
         Route::get('/agency/dashboard', 'dashboard')->name('agency.dashboard');
     });
     //end
+
+    //Category controller
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/categories', 'allCategories')->name('agency.all.categories');
+        Route::get('/add/category', 'addCategory')->name('agency.add.category');
+        Route::post('/store/category', 'storeCategory')->name('store.category');
+
+    });
+    //end
+
+
+
 
     //Product controller
     Route::controller(ProductController::class)->group(function () {
