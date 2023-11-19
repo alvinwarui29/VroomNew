@@ -24,6 +24,7 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
+/// admin middleware
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
 
@@ -68,12 +69,14 @@ Route::get('/dashboard', function () {
     return view('frontend.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//user middleware
 Route::middleware('auth')->group(function () {
     //Tour controller
     Route::controller(TourController::class)->group(function(){
         Route::post('/join/room','joinRoom')->name('join.tour');
         Route::post('/leave/room','leaveRoom')->name('leave.tour');
         Route::get('/get/all/tours','getTours')->name('get.all.tours');
+        Route::get('/all/joined/tours','allJoinedTours')->name('all.joined.tours');
         Route::get('/view/single/tour/{id}/{slug}','getTour')->name('view.single.tour');
         Route::get('/user/logout', [UserController::class, 'UserDestroy'])->name('user.logout');
         Route::get('/user/profile/setup', [UserController::class, 'userProfile'])->name('user.profile.setup');
@@ -86,4 +89,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/users/login', [UserController::class, 'Login'])->name('all.login')->middleware(RedirectIfAuthenticated::class);
+Route::post('/user/login', [UserController::class, 'loginUser'])->name('login.user');
 require __DIR__ . '/auth.php';

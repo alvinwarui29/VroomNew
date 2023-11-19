@@ -5,6 +5,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\Auth\LoginRequest;
 
 class UserController extends Controller
 {
@@ -58,5 +59,32 @@ class UserController extends Controller
 
     public function Login(){
         return view('frontend.displays.login');
+    }
+
+    ///post login method
+    public function loginUser(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        dd($request->user());
+
+        $request->session()->regenerate();
+
+        $notification = array(
+            'message' => 'Login Successfully',
+            'alert-type' => 'success'
+        );
+        $url = '';
+        if ($request->user()->role === 'admin') {
+            $url = "/admin/dashboard";
+        } else if ($request->user()->role === 'agency') {
+            $url = "/agency/dashboard";
+        } else if ($request->user()->role === 'user') {
+            $url = "/dashboard";
+        }else{
+            $url = "/dashboard";
+        }
+        dd($request->user()->role); 
+
+        return redirect()->intended($url)->with($notification);
     }
 }

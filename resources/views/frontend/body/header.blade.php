@@ -6,22 +6,22 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-4">
-                    <div class="header-info">
+                    <!-- <div class="header-info">
                         <ul>
 
                             <li><a href="page-account.html">My Cart</a></li>
                             <li><a href="shop-wishlist.html">Checkout</a></li>
                             <li><a href="shop-order.html">Order Tracking</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-xl-6 col-lg-4">
                     <div class="text-center">
                         <div id="news-flash" class="d-inline-block">
                             <ul>
-                                <li>100% Secure delivery without contacting the courier</li>
-                                <li>Supper Value Deals - Save more with coupons</li>
-                                <li>Trendy 25silver jewelry, save up 35% off today</li>
+                                <li>100% Secure during travels</li>
+                                <li>Supper Value Deals - Save more with amazing offers</li>
+                                <li>Trendy deals from our dealer to up to 35%</li>
                             </ul>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                                 </form>
                             </div>
 
-                            <div class="header-action-icon-2">
+                            <!-- <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                                     <span class="pro-count blue">6</span>
@@ -151,13 +151,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="user-box dropdown">
-                            @php
-                    $id = Auth::user()->id;
-                    $userData = App\Models\User::find($id);
-
-                    @endphp
+                                @php
+                                if(auth()->check()) {
+                                $id = auth()->user()->id;
+                                $userData = App\Models\User::find($id);
+                                }
+                                @endphp
                                 @auth
                                 <a href="{{route('user.profile.setup')}}">
                                     <img src="{{ (!empty($userData->photo)) 
@@ -294,45 +295,23 @@
                             <ul>
 
                                 <li>
-                                    <a class="active" href="index.html">Home </a>
+                                    <a class="active" href="{{route('dashboard')}}">Home </a>
 
                                 </li>
                                 <li>
-                                    <a href="page-about.html">About</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
+                                    @php
+                                    $id = auth()->user()->id;
+                                    $tours = App\Models\JoinedTour::where('user_id',$id)->get();
+
+                                    @endphp
+                                    <a href="{{route('all.joined.tours')}}">Joined Tours <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
-                                        <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                        <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                        <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                        <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                        <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
+                                        @foreach($tours as $tour)
                                         <li>
-                                            <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                                <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                                <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                                <li><a href="shop-product-vendor.html">Product – Vendor Info</a></li>
-                                            </ul>
+
+                                            <a href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> <img src="{{ asset( $tour->product->product_thumbnail) }}"  alt="" />{{$tour->product->product_name}}</a>
                                         </li>
-                                        <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                        <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                        <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                        <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                        <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                        <li>
-                                            <a href="#">Shop Invoice<i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-invoice-1.html">Shop Invoice 1</a></li>
-                                                <li><a href="shop-invoice-2.html">Shop Invoice 2</a></li>
-                                                <li><a href="shop-invoice-3.html">Shop Invoice 3</a></li>
-                                                <li><a href="shop-invoice-4.html">Shop Invoice 4</a></li>
-                                                <li><a href="shop-invoice-5.html">Shop Invoice 5</a></li>
-                                                <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
-                                            </ul>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li>
