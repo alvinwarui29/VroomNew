@@ -75,4 +75,16 @@ class ProductController extends Controller
 
 
     }//end method
+
+    //edit product
+    public function editProduct($id){
+        $product = Product::findorfail($id);
+        $categories = Category::orderBy('category_name','asc')->get();
+        return view ('backend.products.edit_product',compact('product','categories'));
+
+    }
+
+
+
+
 }

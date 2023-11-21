@@ -68,7 +68,12 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/all/products', 'allProducts')->name('agency.all.products');
         Route::get('/add/product', 'addProduct')->name('agency.add.product');
+        Route::get('/edit/product{id}', 'editProduct')->name('edit.product');
+        Route::get('/delete/product{id}', 'deleteProduct')->name('delete.product');
+        Route::get('/deletes/product{id}', 'deleteProduct')->name('product.active');
+        Route::get('/deletess/product{id}', 'deleteProduct')->name('product.inactive');
         Route::post('/store/product', 'storeProduct')->name('store.product');
+        Route::post('/update/product', 'updateProduct')->name('update.product');
     });
     //end
 
@@ -96,7 +101,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/all/joined/tours', 'allJoinedTours')->name('all.joined.tours');
         Route::get('/view/single/tour/{id}/{slug}', 'getTour')->name('view.single.tour');
         Route::get('/view/specific/tours/{categoryid}', 'getSpecificTours')->name('view.specific.tours');
-
     });
     //end
 
@@ -108,6 +112,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/users/login', [UserController::class, 'Login'])->name('all.login')->middleware(RedirectIfAuthenticated::class);
+Route::get('/users/login', [UserController::class, 'Login'])->name('all.login');
+// ->middleware(RedirectIfAuthenticated::class);
 Route::post('/user/login', [UserController::class, 'loginUser'])->name('login.user');
 require __DIR__ . '/auth.php';
