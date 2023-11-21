@@ -291,9 +291,11 @@
                                     <a href="{{route('all.joined.tours')}}">Joined Tours <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($tours as $tour)
+                                        @if($tour )
                                         <li>
                                             <a style="align-content: center;" href="{{ url('view/single/tour/'.$tour->product->id.'/'.$tour->product->product_slug) }}"> {{$tour->product->product_name}}</a>
                                         </li>
+                                        @endif
                                         @endforeach
                                     </ul>
 

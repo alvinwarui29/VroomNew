@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\multiImg;
+use App\Models\JoinedTour;
 use App\Models\Category;
 use \Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +30,7 @@ class ProductController extends Controller
     } //end method
 
     //store product
-    public function storeProduct(Request $req)
-    {
+    public function storeProduct(Request $req){
         $agency_id = Auth()->user()->id;
         $image = $req->file('product_thambnail');
         $name_gen = hexdec(uniqid()) . '_' . time() . '.' . $image->getClientOriginalExtension();
@@ -77,8 +77,7 @@ class ProductController extends Controller
     } //end method
 
     //edit product
-    public function editProduct($id)
-    {
+    public function editProduct($id){
         $products = Product::findorfail($id);
         $categories = Category::orderBy('category_name', 'asc')->get();
         $multiImgs = multiImg::where('product_id', $id)->get();
@@ -173,6 +172,7 @@ class ProductController extends Controller
             unlink($img->photo_name);
             MultiImg::where('product_id',$id)->delete();
         }
+        JoinedTour::where('product_id',$id)->delete();
 
         $notification = array(
             'message' => 'Product Deleted Successfully',

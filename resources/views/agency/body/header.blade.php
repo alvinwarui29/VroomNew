@@ -324,14 +324,14 @@
 					</div>
 					@php
                     $id = Auth::user()->id;
-                    $adminData = App\Models\User::find($id);
+                    $agencyData = App\Models\User::find($id);
 
                     @endphp
 					<div class="user-box dropdown">
 						<a href="{{route('admin.profile.setup')}}">
-							<img src= "{{ (!empty($adminData->photo)) 
+							<img src= "{{ (!empty($agencyData->photo)) 
 							?
-							 url('uploads/admin_images/'.$adminData->photo)
+							 url('uploads/admin_images/'.$agencyData->photo)
 							 :
 							 url('uploads/no_image.jpg') 
 							}}
@@ -341,8 +341,8 @@
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					
 							<div class="user-info ps-3">
-								<p class="user-name mb-0">Pauline Seitz</p>
-								<p class="designattion mb-0">Web Designer</p>
+								<p class="user-name mb-0">{{$agencyData->name}}</p>
+								<p class="designattion mb-0">{{$agencyData->email}}</p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
