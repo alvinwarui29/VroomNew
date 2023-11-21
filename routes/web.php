@@ -68,12 +68,17 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/all/products', 'allProducts')->name('agency.all.products');
         Route::get('/add/product', 'addProduct')->name('agency.add.product');
-        Route::get('/edit/product{id}', 'editProduct')->name('edit.product');
-        Route::get('/delete/product{id}', 'deleteProduct')->name('delete.product');
-        Route::get('/deletes/product{id}', 'deleteProduct')->name('product.active');
-        Route::get('/deletess/product{id}', 'deleteProduct')->name('product.inactive');
+        Route::get('/edit/product/{id}', 'editProduct')->name('edit.product');
+        Route::get('/delete/product/multiimg/{id}', 'deleteMultiImg')->name('product.multiimg.delete');
+        Route::get('/delete/product/{id}', 'deleteProduct')->name('delete.product');
+
+        Route::get('/activate/product/{id}', 'productActive')->name('product.active');
+        Route::get('/inactivate/product/{id}', 'productInactive')->name('product.inactive');
+
         Route::post('/store/product', 'storeProduct')->name('store.product');
         Route::post('/update/product', 'updateProduct')->name('update.product');
+        Route::post('/update/product/multiimage', 'updateProductMultiImage')->name('update.product.multiimage');
+        Route::post('/update/product/thumbnail', 'updateProductThambnail')->name('update.product.thambnail');
     });
     //end
 
