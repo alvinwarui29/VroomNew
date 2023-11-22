@@ -1,12 +1,3 @@
-<!-- @php
-
-$products = App\Models\Product::orderBy('product_name')
-->whereRaw('joined <= product_qty') ->get();
-
-
-	@endphp -->
-
-
 <section class="product-tabs section-padding position-relative">
 	<div class="container wow animate__animated animate__fadeIn">
 		<div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">

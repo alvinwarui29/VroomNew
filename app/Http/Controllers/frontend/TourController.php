@@ -101,13 +101,17 @@ class TourController extends Controller
         ]);
     }//end method
 
+    // view single tour
     public function  getTour($id,$slug){
         $multiImage = multiImg::where('product_id',$id)->get(); 
         $product = Product::findorfail($id);
-        return view('frontend.displays.view_tour',compact('product','multiImage'));
+        $cat_id = $product->category_id;
+        $otherProducts = Product::where('category_id', $cat_id)->inRandomOrder()->limit(3)->get();
+        return view('frontend.displays.view_tour',compact('product','multiImage','otherProducts'));
     }//end method
 
 
+    //filtered tours , get according to category
     public function getSpecificTours($categoryid){
         $specific_products = Product::orderBy('product_name')->where('category_id',$categoryid)->get();
         return view('frontend.displays.view_specific_tours',compact('specific_products'));

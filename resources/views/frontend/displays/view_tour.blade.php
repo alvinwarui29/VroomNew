@@ -79,7 +79,7 @@ $discount = round($discountD);
                                 <p class="font-lg">Available slots:{{$available_slots}}</p>
                                 <p class="font-lg">By:{{$product->agency->name}}</p>
                             </div>
-                           <!-- add to cart -->
+                            <!-- add to cart -->
                             <!-- <div class="detail-extralink mb-50">
                                 <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
@@ -94,16 +94,16 @@ $discount = round($discountD);
                             </div> -->
                             <!-- //end to cart -->
                             <div class="detail-extralink mb-50">
-                            @php
-						$isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
-						@endphp
-                            @if($isjoined == NULL)
-                            <a type="button" onclick="joinRoomV(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-success px-5 radius-30 "> Join Room </a>
-                            @else
+                                @php
+                                $isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
+                                @endphp
+                                @if($isjoined == NULL)
+                                <a type="button" onclick="joinRoomV(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-success px-5 radius-30 "> Join Room </a>
+                                @else
 
-                            <a type="button" onclick="leaveRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-danger px-5 radius-30 "> Leave room </a>
-                            @endif   
-                        </div>
+                                <a type="button" onclick="leaveRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-danger px-5 radius-30 "> Leave room </a>
+                                @endif
+                            </div>
 
                         </div>
                         <!-- Detail Info -->
@@ -122,11 +122,11 @@ $discount = round($discountD);
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade show active" id="Description">
                                 <div class="">
-                                <p> {!! $product->long_descp !!} </p>
+                                    <p> {!! $product->long_descp !!} </p>
                                     </ul>
                                 </div>
                             </div>
-                            
+
                             <div class="tab-pane fade" id="Vendor-info">
                                 <div class="vendor-logo d-flex mb-30">
                                     <img src="assets/imgs/vendor/vendor-18.svg" alt="" />
@@ -164,9 +164,9 @@ $discount = round($discountD);
                             </div>
                             <div class="tab-pane fade" id="Reviews">
                                 <!--Comments-->
-                                
+
                                 <!--comment form-->
-                               
+
                             </div>
                         </div>
                     </div>
@@ -176,134 +176,60 @@ $discount = round($discountD);
                         <h2 class="section-title style-1 mb-30">Related products</h2>
                     </div>
                     <div class="col-12">
-                        <div class="row related-products">
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap hover-up">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                        <section class="product-tabs section-padding position-relative">
+                            <div class="container wow animate__animated animate__fadeIn">
+                                <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
+                                    @foreach($otherProducts as $product)
+                                    @if($product->status ==1 )
+                                    <div class="col">
+                                        <div class="card">
+                                            <img src="{{asset($product->product_thambnail)}}" height="280px" width="480px" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{$product->product_name}}</h5>
+                                                <p style="max-height: 20px; overflow: hidden; text-overflow: ellipsis;" class="card-text">{{$product->short_descp}}</p>
+                                            </div>
+                                            @php
+                                            $slots =$product->product_qty;
+                                            $joined =$product->joined;
+                                            $difference = $slots - $joined;
+                                            @endphp
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Price per person:Ksh{{$product->selling_price}}</li>
+                                                <li class="list-group-item">Total slots:{{$slots}}</li>
+                                                <li class="list-group-item">Slots available:{{$difference}}</li>
+                                                <li class="list-group-item">Agency name:{{$product->agency->name}}</li>
+                                            </ul>
+                                            <div class="card-body">
+                                                @php
+                                                if(auth()->check()) {
+                                                $isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
+                                                $id = Auth::user()->id;
+                                                }else{
+                                                $isjoined = false;
+                                                $id = null;
+                                                }
+                                                @endphp
+                                                @if($isjoined)
+                                                <a type="button" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}">Joined</a>
+                                                @else
+                                                <a type="button" onclick="joinRoom(this.id, '{{ $id}}')" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}"> {{$isjoined ? 'Joined' : 'Join '}} </a>
+                                                @endif
+                                                <a href="{{url('/view/single/tour/'.$product->id.'/'.$product->product_slug)}}" type="button" style="color:#198754; border:solid #198754" class="btn btn-outline-success px-5 radius-30">View Tour</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass Headphone</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
-                                        </div>
-                                    </div>
+                                    @endif
+                                    @endforeach
+
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap hover-up">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="sale">-12%</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth Speaker</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$138.85 </span>
-                                            <span class="old-price">$145.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap hover-up">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$738.85 </span>
-                                            <span class="old-price">$1245.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                <div class="product-cart-wrap hover-up mb-0">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$89.8 </span>
-                                            <span class="old-price">$98.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                        </section>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection
