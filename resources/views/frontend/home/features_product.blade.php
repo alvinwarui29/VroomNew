@@ -1,6 +1,6 @@
 <section class="section-padding pb-5">
     <div class="container">
-        <div class="section-title wow animate__animated animate__fadeIn">
+        <div class="section-title wow animate__animated animate__fadeIn animate__slow">
             <h3 class=""> Tour categories</h3>
 
         </div>
@@ -21,9 +21,9 @@
                                 @foreach($categories as $cat)
                                 <div class="product-cart-wrap">
                                     <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html">
-                                                <img class="default-img" src="{{ asset('uploads/categories_images/'.$cat->category_image)}}" alt="categories" />
+                                        <div style="width: 100px; height:100px;" class="product-img product-img-zoom">
+                                            <a href="{{route('view.specific.tours',$cat->id)}}">
+                                                <img class="default-img" style="max-width: 100%; max-height: 100%;" src="{{ asset('uploads/categories_images/'.$cat->category_image)}}" alt="categories" />
                                             </a>
                                         </div>
                                         <!-- <div class="product-action-1">
@@ -38,8 +38,36 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">{{$cat->category_name}}</a>
+                                            <h1 style="font-size: 20px;"><a style="font-size: 20px;" href="{{route('view.specific.tours',$cat->id)}}">{{$cat->category_name}}</a></h1>
                                         </div>
+                                        @if($cat->tours_count > 0)
+                                        @php
+                                        $totalPrice = 0;
+                                        $persons =0;
+                                        @endphp
+                                        @foreach($cat->tours as $tour)
+                                        @php
+                                        $persons += $tour->product_qty;
+                                        $totalPrice += $tour->selling_price ;
+                                        @endphp
+                                        @endforeach
+                                        @php
+                                            $averagePrice = $totalPrice / $cat->tours_count;
+                                        @endphp
+                                        <div class="product-price mt-10">
+                                            <span>Average Price Ksh{{ $averagePrice }} </span>
+                                        </div>
+                                        <div class="product-price mt-10">
+                                            <span>People joined {{ $persons }} </span>
+                                        </div>
+                                        @else
+                                        <div class="product-price mt-10">
+                                            <span>Average Price Ksh{{ 0 }} </span>
+                                        </div>
+                                        <div class="product-price mt-10">
+                                            <span>People joined {{ 0 }} </span>
+                                        </div>
+                                        @endif
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 80%"></div>
                                         </div>
@@ -48,6 +76,7 @@
                                                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <span class="font-xs text-heading"> {{$cat->tours_count}} tours found</span>
+                                    
                                         </div>
 
                                     </div>
