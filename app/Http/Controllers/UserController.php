@@ -18,11 +18,17 @@ class UserController extends Controller
 {
 
     public function dashboard(){
+        //new products
         $new_products = Product::inRandomOrder()->limit(3)->get();
+        //featured section
         $featured_cat = Product::orderBy('created_at', 'desc')->limit(3)->get();
-        $categories = Category::withCount('tours')->get();
+        //features products
+        $categories = Category::has('tours')->withCount('tours')->get();
 
-        return view('frontend.index',compact('new_products','featured_cat','categories'));
+        //tvcategory
+        $specific_products =Product::inRandomOrder()->orderBy('created_at','asc')->limit(3)->get();
+
+        return view('frontend.index',compact('new_products','featured_cat','categories','specific_products'));
 
     }
 

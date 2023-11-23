@@ -5151,6 +5151,10 @@ table .product-thumbnail img {
   background: #DEF9EC;
   color: #3BB77E;
 }
+.stock-status.in-stocks {
+  background: #e0cca1;
+  color: #1e4583;
+}
 
 .stock-status.out-stock {
   color: #f74b81;
