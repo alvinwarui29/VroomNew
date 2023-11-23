@@ -18,7 +18,7 @@ class ProductController extends Controller
     //getAll products
     public function allProducts()
     {
-        $products = Product::latest()->get();
+        $products = Product::where('agency_id',Auth()->user()->id)->latest()->get();
         return view('backend.products.all_products', compact('products'));
     } //end method
 

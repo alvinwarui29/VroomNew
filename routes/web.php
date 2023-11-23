@@ -92,9 +92,7 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('frontend.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[UserController::class,'dashboard'])->middleware(['auth', 'verified',"role:user"])->name('dashboard');
 
 //user middleware
 Route::middleware('auth')->group(function () {
