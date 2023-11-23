@@ -4,7 +4,7 @@
 
  
         <!--End hero slider-->
-     <!-- @include('frontend.home.featured_categories') -->
+        @include('frontend.home.featured_categories')
 
         <!--End category slider-->
         <!--End banners-->

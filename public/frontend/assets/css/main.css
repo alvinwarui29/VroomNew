@@ -13858,6 +13858,9 @@ a {
 	color: #0d6efd;
 	border-color: #0d6efd #0d6efd #fff
 }
+.wow animate__animated animate__fadeIn {
+  animation-duration: 40s;
+}
 
 .nav-danger.nav-tabs .nav-link.active {
 	color: #f41127;

@@ -157,14 +157,15 @@
                             title: data.error
                         });
                     }
-                    button.text('Leave Room').addClass('btn-danger').removeClass('btn-success');
+                    button.text('Joined').addClass('btn-danger').removeClass('btn-success');
                     // Disable the button
                     button.prop('disabled', true);
+                    location.reload();
                     
                 }
             });
         }
-        function joinRoom(product_id, user_id) {
+        function joinRoomV(product_id, user_id) {
             var button = $('#' + product_id);
 
             if (button.prop('disabled')) {

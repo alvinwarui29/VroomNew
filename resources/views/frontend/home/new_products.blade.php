@@ -9,6 +9,9 @@
 					<div class="card-body">
 						<h5 class="card-title">{{$product->product_name}}</h5>
 						<p style="max-height: 20px; overflow: hidden; text-overflow: ellipsis;" class="card-text">{{$product->short_descp}}</p>
+						<div class="product-badges product-badges-position product-badges-mrg">
+							<span class="hot">Save 15%</span>
+						</div>
 					</div>
 					@php
 					$slots =$product->product_qty;
@@ -32,7 +35,7 @@
 						}
 						@endphp
 						@if($isjoined)
-						<a type="button"  id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}">Joined</a>
+						<a type="button" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}">Joined</a>
 						@else
 						<a type="button" onclick="joinRoom(this.id, '{{ $id}}')" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}"> {{$isjoined ? 'Joined' : 'Join '}} </a>
 						@endif

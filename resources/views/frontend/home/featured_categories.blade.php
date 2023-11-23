@@ -1,92 +1,49 @@
-<section class="popular-categories section-padding">
-            <div class="container wow animate__animated animate__fadeIn">
-                <div class="section-title">
-                    <div class="title">
-                        <h3>Featured Categories</h3>
-                       
-                    </div>
-                    <div class="slider-arrow slider-arrow-2 flex-right carausel-10-columns-arrow" id="carausel-10-columns-arrows"></div>
-                </div>
-                <div class="carausel-10-columns-cover position-relative">
-                    <div class="carausel-10-columns" id="carausel-10-columns">
-                        <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-13.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Cake & Milk</a></h6>
-                            <span>26 items</span>
-                        </div>
-                        <div class="card-2 bg-10 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-12.pn') }}g" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Oganic Kiwi</a></h6>
-                            <span>28 items</span>
-                        </div>
-                        <div class="card-2 bg-11 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-11.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Peach</a></h6>
-                            <span>14 items</span>
-                        </div>
-                        <div class="card-2 bg-12 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-9.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Red Apple</a></h6>
-                            <span>54 items</span>
-                        </div>
-                        <div class="card-2 bg-13 wow animate__animated animate__fadeInUp" data-wow-delay=".5s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-3.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Snack</a></h6>
-                            <span>56 items</span>
-                        </div>
-                        <div class="card-2 bg-14 wow animate__animated animate__fadeInUp" data-wow-delay=".6s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-1.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Vegetables</a></h6>
-                            <span>72 items</span>
-                        </div>
-                        <div class="card-2 bg-15 wow animate__animated animate__fadeInUp" data-wow-delay=".7s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-2.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Strawberry</a></h6>
-                            <span>36 items</span>
-                        </div>
-                        <div class="card-2 bg-12 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-4.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Black plum</a></h6>
-                            <span>123 items</span>
-                        </div>
-                        <div class="card-2 bg-10 wow animate__animated animate__fadeInUp" data-wow-delay=".9s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-5.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Custard apple</a></h6>
-                            <span>34 items</span>
-                        </div>
-                        <div class="card-2 bg-12 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-14.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Coffe & Tea</a></h6>
-                            <span>89 items</span>
-                        </div>
-                        <div class="card-2 bg-11 wow animate__animated animate__fadeInUp" data-wow-delay="0s">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{{ asset('frontend/assets/imgs/shop/cat-5.png') }}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Headphone</a></h6>
-                            <span>87 items</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="product-tabs section-padding position-relative">
+	<div class="container wow animate__animated animate__fadeIn">
+		<div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
+			@foreach($featured_cat as $product)
+			@if($product->status ==1 )
+			<div class="col">
+				<div class="card">
+					<img src="{{asset($product->product_thambnail)}}" height="280px" width="480px" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">{{$product->product_name}}</h5>
+						<p style="max-height: 20px; overflow: hidden; text-overflow: ellipsis;" class="card-text">{{$product->short_descp}}</p>
+					</div>
+					@php
+					$slots =$product->product_qty;
+					$joined =$product->joined;
+					$difference = $slots - $joined;
+					@endphp
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Price per person:Ksh{{$product->selling_price}}</li>
+						<li class="list-group-item">Total slots:{{$slots}}</li>
+						<li class="list-group-item">Slots available:{{$difference}}</li>
+						<li class="list-group-item">Agency name:{{$product->agency->name}}</li>
+					</ul>
+					<div class="card-body">
+						@php
+						if(auth()->check()) {
+						$isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
+						$id = Auth::user()->id;
+						}else{
+						$isjoined = false;
+						$id = null;
+						}
+						@endphp
+						@if($isjoined)
+						<a type="button"  id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}">Joined</a>
+						@else
+						<a type="button" onclick="joinRoom(this.id, '{{ $id}}')" id="{{ $product->id }}" class="{{$isjoined ? 'btn btn-secondary px-5 radius-30 ': 'btn btn-success px-5 radius-30 '}}"> {{$isjoined ? 'Joined' : 'Join '}} </a>
+						@endif
+						<a href="{{url('/view/single/tour/'.$product->id.'/'.$product->product_slug)}}" type="button" style="color:#198754; border:solid #198754" class="btn btn-outline-success px-5 radius-30">View Tour</a>
+					</div>
+				</div>
+			</div>
+			@endif
+			@endforeach
+
+		</div>
+	</div>
+
+</section>

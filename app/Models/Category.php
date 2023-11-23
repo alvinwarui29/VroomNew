@@ -9,4 +9,11 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    // Category.php
+
+public function tours()
+{
+    return $this->hasMany(Product::class, 'category_id');
+}
+
 }

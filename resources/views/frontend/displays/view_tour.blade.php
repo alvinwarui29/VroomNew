@@ -181,7 +181,7 @@ $discount = round($discountD);
                                 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3">
                                     @foreach($otherProducts as $product)
                                     @if($product->status ==1 )
-                                    <div class="col">
+                                    <div style="width: 400px;" class="col">
                                         <div class="card">
                                             <img src="{{asset($product->product_thambnail)}}" height="280px" width="480px" class="card-img-top" alt="...">
                                             <div class="card-body">
@@ -199,7 +199,7 @@ $discount = round($discountD);
                                                 <li class="list-group-item">Slots available:{{$difference}}</li>
                                                 <li class="list-group-item">Agency name:{{$product->agency->name}}</li>
                                             </ul>
-                                            <div class="card-body">
+                                            <div class="card-body ">
                                                 @php
                                                 if(auth()->check()) {
                                                 $isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();

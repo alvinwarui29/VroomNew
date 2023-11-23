@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +18,11 @@ class UserController extends Controller
 {
 
     public function dashboard(){
-        $new_products = Product::limit(3)->get();
-        return view('frontend.index',compact('new_products'));
+        $new_products = Product::inRandomOrder()->limit(3)->get();
+        $featured_cat = Product::orderBy('created_at', 'desc')->limit(3)->get();
+        $categories = Category::withCount('tours')->get();
+
+        return view('frontend.index',compact('new_products','featured_cat','categories'));
 
     }
 
