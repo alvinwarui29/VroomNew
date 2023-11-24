@@ -106,7 +106,7 @@ class TourController extends Controller
         $multiImage = multiImg::where('product_id',$id)->get(); 
         $product = Product::findorfail($id);
         $cat_id = $product->category_id;
-        $otherProducts = Product::where('category_id', $cat_id)->inRandomOrder()->limit(3)->get();
+        $otherProducts = Product::where('category_id', $cat_id)->where('id','!=', $id)->inRandomOrder()->limit(3)->get();
         return view('frontend.displays.view_tour',compact('product','multiImage','otherProducts'));
     }//end method
 

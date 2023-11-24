@@ -27,8 +27,10 @@ class UserController extends Controller
 
         //tvcategory
         $specific_products =Product::inRandomOrder()->orderBy('created_at','asc')->limit(3)->get();
+        $tshirt = Product::inRandomOrder()->orderBy('product_qty','desc')->limit(3)->get();
+        $computer= Product::inRandomOrder()->orderBy('product_qty','asc')->limit(3)->get();
 
-        return view('frontend.index',compact('new_products','featured_cat','categories','specific_products'));
+        return view('frontend.index',compact('new_products','featured_cat','categories','specific_products','tshirt','computer'));
 
     }
 
