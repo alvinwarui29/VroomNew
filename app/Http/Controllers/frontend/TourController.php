@@ -115,6 +115,13 @@ class TourController extends Controller
     public function getSpecificTours($categoryid){
         $specific_products = Product::orderBy('product_name')->where('category_id',$categoryid)->get();
         return view('frontend.displays.view_specific_tours',compact('specific_products'));
+    }//end method
+
+    //display all joined tours
+    public function allJoinedTours(){
+        $joined_tours = JoinedTour::where('user_id',Auth()->user()->id)->pluck('product_id');
+        $tours = Product::whereIn('id',$joined_tours)->get();
+        return view ('frontend.displays.all_joined_tours',compact('tours'));
     }
     
     

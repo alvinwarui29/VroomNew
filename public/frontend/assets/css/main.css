@@ -5336,6 +5336,9 @@ table .product-thumbnail img {
   border: 1px solid #ececec;
   overflow: hidden;
 }
+figure.border-radius-10:hover {
+  outline: none; /* or box-shadow: none; */
+}
 
 .detail-gallery .product-image-slider img {
   opacity: 1;

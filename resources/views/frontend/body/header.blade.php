@@ -63,17 +63,13 @@
                     <div class="search-style-2">
                         <form action="#">
                             <select class="select-active">
-                                <option>All Categories</option>
-                                <option>Milks and Dairies</option>
-                                <option>Wines & Alcohol</option>
-                                <option>Clothing & Beauty</option>
-                                <option>Pet Foods & Toy</option>
-                                <option>Fast food</option>
-                                <option>Baking material</option>
-                                <option>Vegetables</option>
-                                <option>Fresh Seafood</option>
-                                <option>Noodles & Rice</option>
-                                <option>Ice cream</option>
+                                <option>All tour Categories</option>
+                                @php
+                                $all_categories = App\Models\Category::all();
+                                @endphp
+                                @foreach($all_categories as $cat)
+                                <option value="{{$cat->id}}" >{{$cat->category_name}}</option>
+                                @endforeach
                             </select>
                             <input type="text" placeholder="Search for items..." />
                         </form>
@@ -249,7 +245,7 @@
                                 <ul class="end">
                                     @foreach($last_count as $category)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('uploads/categories_images/'.$category->category_image)}}" alt="" />{{$category->category_name}}</a>
+                                        <a href="{{route('view.specific.tours',$category->id)}}"> <img src="{{ asset('uploads/categories_images/'.$category->category_image)}}" alt="" />{{$category->category_name}}</a>
                                     </li>
                                     @endforeach
 
