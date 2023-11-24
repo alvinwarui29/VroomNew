@@ -61,9 +61,10 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
+                        <form action="{{route('product.search')}}" method="post">
+                            @csrf
                             <select class="select-active">
-                                <option>All tour Categories</option>
+                                <option>All Categories</option>
                                 @php
                                 $all_categories = App\Models\Category::all();
                                 @endphp
@@ -71,7 +72,7 @@
                                 <option value="{{$cat->id}}" >{{$cat->category_name}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <input name="search" placeholder="Search for items..." />
                         </form>
                     </div>
                     <div class="header-action-right">

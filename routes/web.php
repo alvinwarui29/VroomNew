@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -24,6 +25,11 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Route::get('/', function () {
     return view('frontend.index');
 });
+
+Route::controller(IndexController::class)->group(function(){
+    Route::post("/product/search","ProductSearch")->name("product.search");
+});
+
 
 /// admin middleware
 Route::middleware(['auth', 'role:admin'])->group(function () {
