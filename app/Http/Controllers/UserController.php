@@ -30,8 +30,9 @@ class UserController extends Controller
         $specific_products =Product::inRandomOrder()->orderBy('created_at','asc')->limit(3)->get();
         $tshirt = Product::inRandomOrder()->orderBy('product_qty','desc')->limit(3)->get();
         $computer= Product::inRandomOrder()->orderBy('product_qty','asc')->limit(3)->get();
+        $agencies = User::where('role','agency')->get();
 
-        return view('frontend.index',compact('new_products','featured_cat','categories','specific_products','tshirt','computer','all_categories'));
+        return view('frontend.index',compact('new_products','featured_cat','agencies','categories','specific_products','tshirt','computer','all_categories'));
 
     }
 

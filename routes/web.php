@@ -28,6 +28,7 @@ Route::get('/', function () {
 
 Route::controller(IndexController::class)->group(function(){
     Route::post("/product/search","ProductSearch")->name("product.search");
+    Route::get("/view/tour/by/agency/{agency_id}","viewTourByAgency")->name("view.tour.by.agency");
 });
 
 
