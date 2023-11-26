@@ -22,9 +22,10 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+
+Route::get('/',[UserController::class,'dashboard']);
+
+Route::get('/dashboard',[UserController::class,'dashboard'])->middleware(['auth', 'verified',"role:user"])->name('dashboard');
 
 Route::controller(IndexController::class)->group(function(){
     Route::post("/product/search","ProductSearch")->name("product.search");
@@ -99,7 +100,6 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
 
 
 
-Route::get('/dashboard',[UserController::class,'dashboard'])->middleware(['auth', 'verified',"role:user"])->name('dashboard');
 
 //user middleware
 Route::middleware('auth')->group(function () {

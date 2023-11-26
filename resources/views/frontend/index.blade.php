@@ -98,6 +98,7 @@
                                     </div>
                                  
                                     <div class="detail-extralink mb-50">
+                                        @if(Auth()->check())
                                         @php
                                         $isjoined = App\Models\JoinedTour::where('user_id',Auth()->user()->id)->where('product_id',$product->id)->first();
                                         @endphp
@@ -106,6 +107,9 @@
                                         @else
 
                                         <a type="button" onclick="leaveRoom(this.id, '{{ Auth::user()->id }}')" id="{{ $product->id }}" class=" btn btn-danger px-5 radius-30 "> Leave room </a>
+                                        @endif
+                                        @else
+                                        <a type="button" onclick="askUserToLogin(this.id)" id="{{ $product->id }}" class=" btn btn-success px-5 radius-30 "> Join Room </a>
                                         @endif
                                     </div>
 

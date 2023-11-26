@@ -262,6 +262,23 @@
             });
         }
         ///end join room
+
+        //ask user to login
+        function askUserToLogin(id){
+            Swal.fire({
+                title: 'Please Login',
+                text: "You need to login to join this tour",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#198754',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/login";
+                }
+            })
+        }
     </script>
     </script>
 

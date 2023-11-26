@@ -279,6 +279,7 @@
                                     <a class="active" href="{{route('dashboard')}}">Home </a>
 
                                 </li>
+                                @if(Auth()->check())
                                 <li>
                                     @php
                                     $id = auth()->user()->id;
@@ -297,6 +298,7 @@
                                     </ul>
 
                                 </li>
+                                @endif
                                 <li>
                                     <a href="#">agencies <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
