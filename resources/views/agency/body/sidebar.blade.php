@@ -22,9 +22,11 @@
 						<div class="menu-title">Product Manage</div>
 					</a>
 					<ul>
-						<li> <a href="{{route('agency.all.products')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
+						<li> <a href="{{route('agency.all.products')}}"><i class="bx bx-right-arrow-alt"></i>All Tours</a>
 						</li>
-						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>New Products</a>
+						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>New Tours</a>
+						</li>
+						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Full Tours</a>
 						</li>
 						
 					</ul>
