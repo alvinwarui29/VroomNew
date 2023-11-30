@@ -79,6 +79,7 @@ Route::middleware(['auth', 'role:agency'])->group(function () {
         Route::get('/edit/product/{id}', 'editProduct')->name('edit.product');
         Route::get('/delete/product/multiimg/{id}', 'deleteMultiImg')->name('product.multiimg.delete');
         Route::get('/delete/product/{id}', 'deleteProduct')->name('delete.product');
+        Route::get('/all/joined/tours/agency','joinedTours')->name('agency.joined.tours');
 
         Route::get('/activate/product/{id}', 'productActive')->name('product.active');
         Route::get('/inactivate/product/{id}', 'productInactive')->name('product.inactive');

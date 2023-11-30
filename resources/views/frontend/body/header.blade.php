@@ -300,6 +300,9 @@
                                 </li>
                                 @endif
                                 <li>
+                                    @php
+                                    $agencies = App\Models\User::where('role','agency')->get();
+                                    @endphp
                                     <a href="#">agencies <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($agencies as $agency)

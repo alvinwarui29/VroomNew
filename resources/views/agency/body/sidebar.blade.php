@@ -26,7 +26,7 @@
 						</li>
 						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>New Tours</a>
 						</li>
-						<li> <a href="{{route('agency.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Full Tours</a>
+						<li> <a href="{{route('agency.joined.tours')}}"><i class="bx bx-right-arrow-alt"></i>Full Tours</a>
 						</li>
 						
 					</ul>

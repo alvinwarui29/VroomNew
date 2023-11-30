@@ -15,6 +15,12 @@ use Carbon\Carbon;
 
 class ProductController extends Controller
 {
+    //joined tours
+    public function joinedTours(){
+        $tours = Product::whereColumn('joined', 'product_qty')->where('agency_id',Auth()->user()->id)->get();
+        return view ('backend.products.full_tours',compact('tours'));
+    }//end method
+
     //getAll products
     public function allProducts()
     {
