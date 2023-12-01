@@ -40,11 +40,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						//TODO: Hide tours that are fully joined from this section
-						@php
-						if ($products->joined == $products->product_qty)
-
-						@endphp
+						
 						@foreach($products as $key => $item)
 						<tr>
 							<td> {{ $key+1 }} </td>

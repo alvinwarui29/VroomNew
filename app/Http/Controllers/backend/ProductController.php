@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 
+
 class ProductController extends Controller
 {
     //joined tours
@@ -23,8 +24,8 @@ class ProductController extends Controller
 
     //getAll products
     public function allProducts()
-    {
-        $products = Product::where('agency_id',Auth()->user()->id)->latest()->get();
+    { 
+        $products = Product::where('agency_id',Auth()->user()->id)->whereRaw('joined != product_qty OR joined = 0')->latest()->get();
         return view('backend.products.all_products', compact('products'));
     } //end method
 
